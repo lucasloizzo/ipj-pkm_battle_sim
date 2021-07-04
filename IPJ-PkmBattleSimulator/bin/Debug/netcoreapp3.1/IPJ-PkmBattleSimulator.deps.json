@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "IPJ-PkmBattleSimulator/1.0.0": {
+        "runtime": {
+          "IPJ-PkmBattleSimulator.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "IPJ-PkmBattleSimulator/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPJ-PkmBattleSimulator", "IPJ-PkmBattleSimulator\IPJ-PkmBattleSimulator.csproj", "{B57E6E16-13A3-4BD1-8BC3-1927084AE0AA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B57E6E16-13A3-4BD1-8BC3-1927084AE0AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B57E6E16-13A3-4BD1-8BC3-1927084AE0AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B57E6E16-13A3-4BD1-8BC3-1927084AE0AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B57E6E16-13A3-4BD1-8BC3-1927084AE0AA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1E17B808-8919-467F-BDDA-E4BE48D492DC}
+	EndGlobalSection
+EndGlobal

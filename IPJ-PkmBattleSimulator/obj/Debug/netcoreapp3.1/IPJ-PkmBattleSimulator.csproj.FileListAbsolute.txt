@@ -1,0 +1,13 @@
+C:\Users\loizz\source\repos\IPJ-PkmBattleSimulator\IPJ-PkmBattleSimulator\bin\Debug\netcoreapp3.1\IPJ-PkmBattleSimulator.exe
+C:\Users\loizz\source\repos\IPJ-PkmBattleSimulator\IPJ-PkmBattleSimulator\bin\Debug\netcoreapp3.1\IPJ-PkmBattleSimulator.deps.json
+C:\Users\loizz\source\repos\IPJ-PkmBattleSimulator\IPJ-PkmBattleSimulator\bin\Debug\netcoreapp3.1\IPJ-PkmBattleSimulator.runtimeconfig.json
+C:\Users\loizz\source\repos\IPJ-PkmBattleSimulator\IPJ-PkmBattleSimulator\bin\Debug\netcoreapp3.1\IPJ-PkmBattleSimulator.runtimeconfig.dev.json
+C:\Users\loizz\source\repos\IPJ-PkmBattleSimulator\IPJ-PkmBattleSimulator\bin\Debug\netcoreapp3.1\IPJ-PkmBattleSimulator.dll
+C:\Users\loizz\source\repos\IPJ-PkmBattleSimulator\IPJ-PkmBattleSimulator\bin\Debug\netcoreapp3.1\IPJ-PkmBattleSimulator.pdb
+C:\Users\loizz\source\repos\IPJ-PkmBattleSimulator\IPJ-PkmBattleSimulator\obj\Debug\netcoreapp3.1\IPJ-PkmBattleSimulator.csprojAssemblyReference.cache
+C:\Users\loizz\source\repos\IPJ-PkmBattleSimulator\IPJ-PkmBattleSimulator\obj\Debug\netcoreapp3.1\IPJ-PkmBattleSimulator.AssemblyInfoInputs.cache
+C:\Users\loizz\source\repos\IPJ-PkmBattleSimulator\IPJ-PkmBattleSimulator\obj\Debug\netcoreapp3.1\IPJ-PkmBattleSimulator.AssemblyInfo.cs
+C:\Users\loizz\source\repos\IPJ-PkmBattleSimulator\IPJ-PkmBattleSimulator\obj\Debug\netcoreapp3.1\IPJ-PkmBattleSimulator.csproj.CoreCompileInputs.cache
+C:\Users\loizz\source\repos\IPJ-PkmBattleSimulator\IPJ-PkmBattleSimulator\obj\Debug\netcoreapp3.1\IPJ-PkmBattleSimulator.dll
+C:\Users\loizz\source\repos\IPJ-PkmBattleSimulator\IPJ-PkmBattleSimulator\obj\Debug\netcoreapp3.1\IPJ-PkmBattleSimulator.pdb
+C:\Users\loizz\source\repos\IPJ-PkmBattleSimulator\IPJ-PkmBattleSimulator\obj\Debug\netcoreapp3.1\IPJ-PkmBattleSimulator.genruntimeconfig.cache
