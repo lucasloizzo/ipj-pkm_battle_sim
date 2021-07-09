@@ -10,7 +10,8 @@ public class Pokemon
     private int level;
     private string type;
     //private List<Type> types;
-    private int life;
+    private int maxLife;
+    private int currentLife;
     private int attack;
     private int specialAttack;
     private int defense;
@@ -30,7 +31,8 @@ public class Pokemon
         this.name = lines[0];
         this.level = Convert.ToInt32(lines[1]);
         this.type = lines[2];
-        this.life = Convert.ToInt32(lines[3]);
+        this.maxLife = Convert.ToInt32(lines[3]);
+        this.currentLife = maxLife;
         this.attack = Convert.ToInt32(lines[4]);
         this.specialAttack = Convert.ToInt32(lines[5]);
         this.defense = Convert.ToInt32(lines[6]);
@@ -41,5 +43,37 @@ public class Pokemon
 
         return this;
     }
+
+    public bool CheckPokemonAlive(int currentLife)
+    {
+        bool isPkmAlive = true;
+
+        if (currentLife <= 0)
+        {
+            isPkmAlive = false;
+        }
+
+        return isPkmAlive;
+    }
+
+    public int GetCurrentLife()
+    {
+        return currentLife;
+    }
+
+    public string GetStatus()
+    {
+        string status = "";
+
+        status += name + "\n";
+        status += "HP: " + currentLife + "/" + maxLife + "\n";
+
+        return status;
+    }
+
+    //public List<Movement> GetMovements()
+    //{
+    //    return movements;
+    //}
 }
 

@@ -20,8 +20,39 @@ public abstract class Trainer
         }
     }
 
-    public void LoadTeamFromFolder(string name, string path)
+    public bool CheckTeamAlive(Trainer trainer)
     {
+        bool teamAlive = true;
+        List<bool> teamCheck = new List<bool>();
+        int countFaintedPkm = 0;
 
+        for (int i = 0; i < trainer.pokemons.Count; i++)
+        {
+            teamCheck.Add(pokemons[i].CheckPokemonAlive(pokemons[i].GetCurrentLife()));
+        }
+
+        for (int i = 0; i < teamCheck.Count; i++)
+        {
+            if (teamCheck[i] == false)
+            {
+                countFaintedPkm++;
+            }
+        }
+
+        if (countFaintedPkm == teamCheck.Count)
+        {
+            teamAlive = false;
+        }
+        return teamAlive;
+    }
+
+    public Pokemon GetActivePokemon()
+    {
+        return pokemons[0];
+    }
+
+    public string GetName()
+    {
+        return name;
     }
 }

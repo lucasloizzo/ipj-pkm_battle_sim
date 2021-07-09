@@ -8,4 +8,10 @@ public sealed class Player : Trainer
     {
 
     }
+
+    public void Choice()
+    {
+        Console.WriteLine("1- Fight     2- Switch");
+
+    }
 }
