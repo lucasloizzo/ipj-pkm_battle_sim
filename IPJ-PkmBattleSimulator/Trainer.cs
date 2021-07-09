@@ -55,4 +55,9 @@ public abstract class Trainer
     {
         return name;
     }
+
+    public List<Pokemon> GetPokemonTeam()
+    {
+        return pokemons;
+    }
 }

@@ -71,6 +71,17 @@ public class Pokemon
         return status;
     }
 
+    public string GetPkmData()
+    {
+        string status = "";
+
+        status += name + "\n";
+        status += "HP: " + currentLife + "/" + maxLife + "\n";
+        status += "Types: " + type + "\n";
+        //status += GetMovementName();
+        return status;
+    }
+
     //public List<Movement> GetMovements()
     //{
     //    return movements;

@@ -1,0 +1,1 @@
+﻿public enum SpeedCheck { PlayerFirst = 1, EnemyFirst = 2, Equal = 3};

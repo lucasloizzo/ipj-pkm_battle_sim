@@ -1,0 +1,1 @@
+﻿public enum BattleChoice { Fight = 1, Switch = 2, Error = 3};
