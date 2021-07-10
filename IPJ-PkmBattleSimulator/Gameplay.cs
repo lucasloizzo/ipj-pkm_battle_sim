@@ -11,8 +11,14 @@ public class Gameplay
 
     public Gameplay()
     {
-        player = new Player("Red", "../../../resources/Red");
-        enemy = new Enemy("Blue", "../../../resources/Blue");
+        string path = "../../../resources/Red";
+        DirectoryInfo directoryPlayer = new DirectoryInfo(path);
+        string namePlayer = directoryPlayer.Name;
+        player = new Player(namePlayer, path);
+        path = "../../../resources/Blue";
+        DirectoryInfo directoryEnemy = new DirectoryInfo(path);
+        string nameEnemy = directoryEnemy.Name;
+        enemy = new Enemy(nameEnemy, path);
     }
 
     public void Play()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 
 public abstract class Trainer
@@ -12,12 +13,22 @@ public abstract class Trainer
     {
         this.name = name;
         pokemons = new List<Pokemon>();
-        for (int i = 0; i < 3; i++) //TODO  change condition for quantity of files in folder
+        int pkmQuantity = GetPokemonQuantity(path);
+        for (int i = 0; i < pkmQuantity; i++) //TODO  change condition for quantity of files in folder
         {
             Pokemon P = new Pokemon();
             P = PokemonReader.ReadPokemonFromFile(P, path + "/pokemon" + (i + 1) + ".pkm");
             pokemons.Add(P);
         }
+    }
+
+    public int GetPokemonQuantity(string path)
+    {
+        int pkmQuantity;
+        DirectoryInfo directory = new DirectoryInfo(path);
+        pkmQuantity = directory.GetFiles().Length;
+
+        return pkmQuantity;
     }
 
     public bool CheckTeamAlive(Trainer trainer)
