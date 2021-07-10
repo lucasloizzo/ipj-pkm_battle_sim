@@ -15,6 +15,8 @@ public static class MovementDatabase
                     return new Tackle();
                 case "Thunderbolt":
                     return new Thunderbolt();
+                case "Splash":
+                    return new Splash();
                 default:
                     throw new MissingMovementException("The movement " + movementName + " does not exist");
             }

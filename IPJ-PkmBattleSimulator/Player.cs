@@ -59,14 +59,21 @@ public sealed class Player : Trainer
         int input = 0;
 
         Console.WriteLine("Choose # of Pkm to switch: ");
-        input = Convert.ToInt32(Console.ReadLine());
+        do
+        {
+            input = Convert.ToInt32(Console.ReadLine());
+            if (input == 0)
+            {
+                Console.WriteLine("That's already your active Pokemon. Choose # of Pkm to switch: ");
+            }
+        } while (input == 0);
 
         return input;
     }
 
     public void ShowTeam(List<Pokemon> pokemons)
     {
-        for (int i = 1; i < pokemons.Count; i++)
+        for (int i = 0; i < pokemons.Count; i++)
         {
             Console.WriteLine("# - " + i);
             Console.WriteLine(pokemons[i].GetPkmData());

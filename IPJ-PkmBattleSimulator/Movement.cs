@@ -63,3 +63,19 @@ public sealed class Thunderbolt : Movement
         return damage;
     }
 }
+
+public sealed class Splash : Movement
+{
+    public Splash()
+    {
+        name = "Splash";
+        potency = 0;
+        type = "Normal";
+    }
+
+    public override int Use(Pokemon caster, Pokemon objective)
+    {
+        int damage = 0;
+        return damage;
+    }
+}

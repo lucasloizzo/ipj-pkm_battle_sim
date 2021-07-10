@@ -25,35 +25,38 @@ public class Gameplay
     public Trainer Battle(Player player, Enemy enemy)
     {
         bool battling = true;
-        BattleChoice battleChoice;
+        BattleChoice playerBattleChoice;
+        BattleChoice enemyDecision;
         SpeedCheck speedCheck;
-        Movement movementChoice = new DefaultError();
+        Movement playerMovementChoice = new DefaultError();
+        Movement enemyMovement = new DefaultError();
         int pokemonChoice = 0;
-        int damage = 0;
+        bool pkmAlive = true;
 
         do
         {
+            Console.Clear();
             //show state
             ShowGameState(player);
             ShowGameState(enemy);
             //player choice
             do
             {
-                battleChoice = player.Choice();
+                playerBattleChoice = player.Choice();
 
-                if (battleChoice == BattleChoice.Fight)
+                if (playerBattleChoice == BattleChoice.Fight)
                 {
                     try
                     {
-                        movementChoice = player.MovementChoice(player.GetActivePokemon());
+                        playerMovementChoice = player.MovementChoice(player.GetActivePokemon());
                     }
                     catch (Exception )
                     {
                         Console.WriteLine("That # of move does not exist. Try again.");
-                        battleChoice = BattleChoice.Error;
+                        playerBattleChoice = BattleChoice.Error;
                     }
                 }
-                else if (battleChoice == BattleChoice.Switch)
+                else if (playerBattleChoice == BattleChoice.Switch)
                 {
                         pokemonChoice = player.PokemonChoice(player.GetPokemonTeam());
                 }
@@ -61,90 +64,122 @@ public class Gameplay
                 {
                     Console.WriteLine("This is not the time nor the place. Choose again.");
                 }
-            } while (battleChoice == BattleChoice.Error);
-            Console.Clear();
-            //TODO enemy decision
+            } while (playerBattleChoice == BattleChoice.Error);
+
+            //TODO enemy decision. change when AI implemented
+            enemyDecision = BattleChoice.Fight;
+            enemyMovement = new Tackle();
 
             //check turn order
-            if (battleChoice == BattleChoice.Switch)
+            switch (playerBattleChoice)
             {
-                try
-                {
-                    player.ChangeActivePokemon(pokemonChoice);
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("That # of pokemons does not exist. Try again.");
-                    battleChoice = BattleChoice.Error;
-                }
-                //enemy moves second
-                //check if pkm of player faints
-            }
-            //else if (enemyDecision == BattleChoice.Switch)
-            //{
-            //    //enemy move first
-            //    //player moves second
-            //    //check if pkm of enemy faints
-            //}
-            else
-            {
-                //check speed
-                speedCheck = CheckTurnOrder(player.GetActivePokemon().GetSpeed(), enemy.GetActivePokemon().GetSpeed());
-                switch (speedCheck)
-                {
-                    case SpeedCheck.PlayerFirst: //TODO add this code to a function for the enemy and another for the player
-                        //player pokemon use move
-                        damage = movementChoice.Use(player.GetActivePokemon(), enemy.GetActivePokemon());
-                        enemy.GetActivePokemon().TakeDamage(damage);
-                        Console.WriteLine(player.GetActivePokemon().GetName() + " uses " + movementChoice + ". It dealt " + damage + " damage.\n");
-                        //check if enemy pkm faints (if it does, check if team is alive and if it is, select one to replace)
-                        bool pkmAlive = enemy.GetActivePokemon().CheckPokemonAlive(enemy.GetActivePokemon().GetCurrentLife());
-                        if (pkmAlive == false)
-                        {
-                            EnemyPkmFainted();
-                        }
-                        else
-                        {
-                            //TODO enemy pkm use move
+                case BattleChoice.Switch:
+                    try
+                    {
+                        player.ChangeActivePokemon(pokemonChoice);
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("That # of pokemons does not exist. Try again.");
+                        playerBattleChoice = BattleChoice.Error;
+                    }
+                    switch (enemyDecision)
+                    {
+                        case BattleChoice.Switch:
+                            //TODO implement me
+                            break;
+                        case BattleChoice.Fight:
+                            //enemy pkm use move
                             Console.WriteLine("Enemy forgot how to act");
-                        }
-                        //check if player pkm faints (if it does, select one to replace)
-                        pkmAlive = player.GetActivePokemon().CheckPokemonAlive(player.GetActivePokemon().GetCurrentLife());
-                        if (pkmAlive == false)
-                        {
-                            PlayerPkmFainted();
-                        }
-                        break;
-                    case SpeedCheck.EnemyFirst:
-                        //enemy pkm use move
-                        Console.WriteLine("Enemy forgot how to act");
-                        //check if player pkm faints (if it does, select one to replace)
-                        pkmAlive = player.GetActivePokemon().CheckPokemonAlive(player.GetActivePokemon().GetCurrentLife());
-                        if (pkmAlive == false)
-                        {
-                            PlayerPkmFainted();
-                        }
-                        else
-                        {
+                            //check if player pkm faints (if it does, select one to replace)
+                            pkmAlive = player.GetActivePokemon().CheckPokemonAlive(player.GetActivePokemon().GetCurrentLife());
+                            if (pkmAlive == false)
+                            {
+                                player.PlayerPkmFainted(player);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case BattleChoice.Fight:
+                    switch (enemyDecision)
+                    {
+                        case BattleChoice.Switch:
+                            //TODO implement enemy switch
+
                             //player pokemon use move
-                            damage = movementChoice.Use(player.GetActivePokemon(), enemy.GetActivePokemon());
-                            enemy.GetActivePokemon().TakeDamage(damage);
-                            Console.WriteLine(player.GetActivePokemon().GetName() + " uses " + movementChoice + ". It dealt " + damage + " damage.\n");
-                        }
-                        //check if enemy pkm faints (if it does, select one to replace)
-                        pkmAlive = enemy.GetActivePokemon().CheckPokemonAlive(enemy.GetActivePokemon().GetCurrentLife());
-                        if (pkmAlive == false)
-                        {
-                            EnemyPkmFainted();
-                        }
-                        break;
-                    default:
-                        break;
-                }
+                            enemy = (Enemy)DamageCalc(player, enemy, playerMovementChoice);
+                            //check if enemy pkm faints (if it does, check if team is alive and if it is, select one to replace)
+                            pkmAlive = enemy.GetActivePokemon().CheckPokemonAlive(enemy.GetActivePokemon().GetCurrentLife());
+                            if (pkmAlive == false)
+                            {
+                                enemy.EnemyPkmFainted(enemy);
+                            }
+                            break;
+                        case BattleChoice.Fight:
+                            speedCheck = CheckTurnOrder(player.GetActivePokemon().GetSpeed(), enemy.GetActivePokemon().GetSpeed());
+                            switch (speedCheck)
+                            {
+                                case SpeedCheck.PlayerFirst:
+                                    //player pokemon use move
+                                    enemy = (Enemy)DamageCalc(player, enemy, playerMovementChoice);
+                                    //check if enemy pkm faints (if it does, check if team is alive and if it is, select one to replace)
+                                    pkmAlive = enemy.GetActivePokemon().CheckPokemonAlive(enemy.GetActivePokemon().GetCurrentLife());
+                                    if (pkmAlive == false)
+                                    {
+                                        enemy.EnemyPkmFainted(enemy);
+                                    }
+                                    else
+                                    {
+                                        //TODO enemy pkm use move
+                                        player = (Player)DamageCalc(enemy, player, enemyMovement);
+                                    }
+                                    //check if player pkm faints (if it does, select one to replace)
+                                    pkmAlive = player.GetActivePokemon().CheckPokemonAlive(player.GetActivePokemon().GetCurrentLife());
+                                    if (pkmAlive == false)
+                                    {
+                                        player.PlayerPkmFainted(player);
+                                    }
+                                    break;
+                                case SpeedCheck.EnemyFirst:
+                                    //enemy pkm use move
+                                    player = (Player)DamageCalc(enemy, player, enemyMovement);
+                                    //check if player pkm faints (if it does, select one to replace)
+                                    pkmAlive = player.GetActivePokemon().CheckPokemonAlive(player.GetActivePokemon().GetCurrentLife());
+                                    if (pkmAlive == false)
+                                    {
+                                        player.PlayerPkmFainted(player);
+                                    }
+                                    else
+                                    {
+                                        //player pokemon use move
+                                        enemy = (Enemy)DamageCalc(player, enemy, playerMovementChoice);
+                                    }
+                                    //check if enemy pkm faints (if it does, select one to replace)
+                                    pkmAlive = enemy.GetActivePokemon().CheckPokemonAlive(enemy.GetActivePokemon().GetCurrentLife());
+                                    if (pkmAlive == false)
+                                    {
+                                        enemy.EnemyPkmFainted(enemy);
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+
+                default:
+                    break;
             }
 
-            //check battle end condition (both teams fainted)
+            //check battle end condition (any team fainted)
             battling = CheckTrainersTeams(player, enemy);
+            Console.WriteLine("Turn ended. Press any key to continue...");
+            Console.ReadKey();
         } while (battling);
 
         Trainer winner = CheckWinner(player, enemy);
@@ -218,42 +253,13 @@ public class Gameplay
         return turnOrder;
     }
 
-    public void EnemyPkmFainted()
+    public Trainer DamageCalc(Trainer caster, Trainer objective, Movement movementChoice)
     {
-        bool teamAlive = enemy.CheckTeamAlive(enemy);
-        bool pkmAlive;
-        if (teamAlive == true)
-        {
-            int num = 1;
-            do
-            {
-                enemy.ChangeActivePokemon(num);
-                pkmAlive = enemy.GetActivePokemon().CheckPokemonAlive(enemy.GetActivePokemon().GetCurrentLife());
-                num++;
-            } while (num <= enemy.GetPokemonTeam().Count && pkmAlive == false);
-        }
-    }
+        int damage = 0;
+        damage = movementChoice.Use(caster.GetActivePokemon(), objective.GetActivePokemon());
+        objective.GetActivePokemon().TakeDamage(damage);
+        Console.WriteLine(caster.GetName() + "'s " + caster.GetActivePokemon().GetName() + " uses " + movementChoice + ". It dealt " + damage + " damage.\n");
 
-    public void PlayerPkmFainted()
-    {
-        bool teamAlive = player.CheckTeamAlive(player);
-        int pokemonChoice = 0;
-        if (teamAlive == true)
-        {
-
-            do
-            {
-                Console.WriteLine("Active Pokemon fainted.");
-                pokemonChoice = player.PokemonChoice(player.GetPokemonTeam());
-                try
-                {
-                    player.ChangeActivePokemon(pokemonChoice);
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("That # of pokemons does not exist. Try again.");
-                }
-            } while (player.GetActivePokemon().CheckPokemonAlive(player.GetActivePokemon().GetCurrentLife()) == false);
-        }
+        return objective;
     }
 }
