@@ -24,7 +24,6 @@ class Game
 
     public bool Start()
     {
-        //load trainers
         gameplay.Play();
         Console.WriteLine("Play again? (y/n)");
         string answer = Console.ReadLine();

@@ -28,23 +28,40 @@ public sealed class Player : Trainer
         return battleChoice;
     }
 
-    public void MovementChoice()
+    public Movement MovementChoice(Pokemon pokemon)
     {
-        //show movements
+        ShowMovements(pokemon);
+        int input = 0;
+        Console.WriteLine("Choose # of move: ");
+        input = Convert.ToInt32(Console.ReadLine());
+        try
+        {
+            return pokemon.GetMovement(input);
+        }
+        catch (System.ArgumentOutOfRangeException)
+        {
+            throw;
+        }
     }
 
-    public void PokemonChoice(List<Pokemon> pokemons)
+    public void ShowMovements(Pokemon pokemon)
+    {
+        List<Movement> moveList = pokemon.GetMovements();
+        for (int i = 0; i < moveList.Count; i++)
+        {
+            Console.WriteLine("#" + i + " " + moveList[i].name);
+        }
+    }
+
+    public int PokemonChoice(List<Pokemon> pokemons)
     {
         ShowTeam(pokemons);
         int input = 0;
-        Pokemon aux = new Pokemon();
 
         Console.WriteLine("Choose # of Pkm to switch: ");
         input = Convert.ToInt32(Console.ReadLine());
-        
-        aux = pokemons[0];
-        pokemons[0] = pokemons[input];
-        pokemons[input] = aux;
+
+        return input;
     }
 
     public void ShowTeam(List<Pokemon> pokemons)

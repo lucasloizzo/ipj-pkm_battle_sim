@@ -46,6 +46,15 @@ public abstract class Trainer
         return teamAlive;
     }
 
+    public void ChangeActivePokemon(int input)
+    {
+        Pokemon aux = new Pokemon();
+
+        aux = pokemons[0];
+        pokemons[0] = pokemons[input];
+        pokemons[input] = aux;
+    }
+
     public Pokemon GetActivePokemon()
     {
         return pokemons[0];
