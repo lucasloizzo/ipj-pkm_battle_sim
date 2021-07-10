@@ -14,6 +14,10 @@ public abstract class Trainer
         this.name = name;
         pokemons = new List<Pokemon>();
         int pkmQuantity = GetPokemonQuantity(path);
+        if (pkmQuantity > 6)
+        {
+            pkmQuantity = 6;
+        }
         for (int i = 0; i < pkmQuantity; i++) //TODO  change condition for quantity of files in folder
         {
             Pokemon P = new Pokemon();

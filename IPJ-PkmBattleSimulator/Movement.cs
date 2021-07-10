@@ -47,6 +47,40 @@ public sealed class Tackle : Movement
     }
 }
 
+public sealed class Slash : Movement
+{
+    public Slash()
+    {
+        name = "Slash";
+        potency = 50;
+        type = "Normal";
+    }
+
+    public override float Use(Pokemon caster, Pokemon objective)
+    {
+        float damage;
+        damage = (float)(((0.2 * caster.GetLevel() + 1) * caster.GetAttack() * potency) / (25 * objective.GetDefense())) + 2;
+        return damage;
+    }
+}
+
+public sealed class Peck : Movement
+{
+    public Peck()
+    {
+        name = "Peck";
+        potency = 40;
+        type = "Flying";
+    }
+
+    public override float Use(Pokemon caster, Pokemon objective)
+    {
+        float damage;
+        damage = (float)(((0.2 * caster.GetLevel() + 1) * caster.GetAttack() * potency) / (25 * objective.GetDefense())) + 2;
+        return damage;
+    }
+}
+
 public sealed class Thunderbolt : Movement
 {
     public Thunderbolt()
@@ -54,6 +88,23 @@ public sealed class Thunderbolt : Movement
         name = "Thunderbolt";
         potency = 95;
         type = "Electric";
+    }
+
+    public override float Use(Pokemon caster, Pokemon objective)
+    {
+        float damage;
+        damage = (float)(((0.2 * caster.GetLevel() + 1) * caster.GetSpecialAttack() * potency) / (25 * objective.GetSpecialDefense())) + 2;
+        return damage;
+    }
+}
+
+public sealed class Ember : Movement
+{
+    public Ember()
+    {
+        name = "Ember";
+        potency = 40;
+        type = "Fire";
     }
 
     public override float Use(Pokemon caster, Pokemon objective)

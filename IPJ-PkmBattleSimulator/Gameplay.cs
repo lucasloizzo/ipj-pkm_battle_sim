@@ -72,9 +72,9 @@ public class Gameplay
                 }
             } while (playerBattleChoice == BattleChoice.Error);
 
-            //TODO enemy decision. change when AI implemented
+            //TODO enemy decision. change when implemented in AI (only return movement choice now) it needs to return <BattleChoice, Movement>
             enemyDecision = BattleChoice.Fight;
-            enemyMovement = new Tackle();
+            enemyMovement = enemy.UpdateState(enemy, player.GetActivePokemon());
 
             //check turn order
             switch (playerBattleChoice)

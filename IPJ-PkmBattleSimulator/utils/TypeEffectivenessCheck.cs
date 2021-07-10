@@ -34,7 +34,7 @@ public static class TypeEffectivenessCheck
                 {
                     typeEffectiveness = TypeEffectiveness.SuperEffective;
                 }
-                else if (objective == Type.Ghost || objective == Type.Flying || objective == Type.Poison || objective == Type.Fighting || objective == Type.Fire)
+                else if (objective == Type.Electric || objective == Type.Rock)
                 {
                     typeEffectiveness = TypeEffectiveness.NotVeryEfffective;
                 }
@@ -54,13 +54,9 @@ public static class TypeEffectivenessCheck
                 {
                     typeEffectiveness = TypeEffectiveness.SuperEffective;
                 }
-                else if (objective == Type.Electric || objective == Type.Grass)
+                else if (objective == Type.Ghost || objective == Type.Flying || objective == Type.Poison || objective == Type.Fighting || objective == Type.Fire)
                 {
                     typeEffectiveness = TypeEffectiveness.NotVeryEfffective;
-                }
-                else if (objective == Type.Ground)
-                {
-                    typeEffectiveness = TypeEffectiveness.Immune;
                 }
                 else
                 {

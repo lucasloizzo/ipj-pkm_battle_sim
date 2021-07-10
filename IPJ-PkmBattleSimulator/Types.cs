@@ -35,7 +35,7 @@ public class Types
         }
         else
         {
-            Console.WriteLine("Error");
+            //Console.WriteLine("Error");
             return Type.Error;
         }
     }

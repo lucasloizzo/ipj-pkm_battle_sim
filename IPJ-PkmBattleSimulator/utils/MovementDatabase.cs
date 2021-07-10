@@ -13,8 +13,14 @@ public static class MovementDatabase
             {
                 case "Tackle":
                     return new Tackle();
+                case "Slash":
+                    return new Slash();
+                case "Peck":
+                    return new Peck();
                 case "Thunderbolt":
                     return new Thunderbolt();
+                case "Ember":
+                    return new Ember();
                 case "Splash":
                     return new Splash();
                 default:
