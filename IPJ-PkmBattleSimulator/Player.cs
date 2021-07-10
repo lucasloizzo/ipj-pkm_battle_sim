@@ -54,18 +54,25 @@ public sealed class Player : Trainer
 
     public int PokemonChoice(List<Pokemon> pokemons)
     {
+        //TODO add option to go back to battle menu to prevent loop
         ShowTeam(pokemons);
-        int input = 0;
+        int input;
+        int life;
 
         Console.WriteLine("Choose # of Pkm to switch: ");
         do
         {
             input = Convert.ToInt32(Console.ReadLine());
+            life = pokemons[input].GetCurrentLife();
             if (input == 0)
             {
                 Console.WriteLine("That's already your active Pokemon. Choose # of Pkm to switch: ");
             }
-        } while (input == 0);
+            if (life <= 0)
+            {
+                Console.WriteLine("This Pokemon can't fight anymore. Choose # of Pkm to switch: ");
+            }
+        } while (input == 0 || life <= 0);
 
         return input;
     }
