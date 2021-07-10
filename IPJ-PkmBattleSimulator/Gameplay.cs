@@ -95,6 +95,7 @@ public class Gameplay
                             pkmAlive = player.GetActivePokemon().CheckPokemonAlive(player.GetActivePokemon().GetCurrentLife());
                             if (pkmAlive == false)
                             {
+                                Console.WriteLine(player.FaintMessage(player));
                                 player.PlayerPkmFainted(player);
                             }
                             break;
@@ -114,6 +115,7 @@ public class Gameplay
                             pkmAlive = enemy.GetActivePokemon().CheckPokemonAlive(enemy.GetActivePokemon().GetCurrentLife());
                             if (pkmAlive == false)
                             {
+                                Console.WriteLine(enemy.FaintMessage(enemy));
                                 enemy.EnemyPkmFainted(enemy);
                             }
                             break;
@@ -128,17 +130,19 @@ public class Gameplay
                                     pkmAlive = enemy.GetActivePokemon().CheckPokemonAlive(enemy.GetActivePokemon().GetCurrentLife());
                                     if (pkmAlive == false)
                                     {
+                                        Console.WriteLine(enemy.FaintMessage(enemy));
                                         enemy.EnemyPkmFainted(enemy);
                                     }
                                     else
                                     {
-                                        //TODO enemy pkm use move
+                                        //enemy pkm use move
                                         player = (Player)DamageCalc(enemy, player, enemyMovement);
                                     }
                                     //check if player pkm faints (if it does, select one to replace)
                                     pkmAlive = player.GetActivePokemon().CheckPokemonAlive(player.GetActivePokemon().GetCurrentLife());
                                     if (pkmAlive == false)
                                     {
+                                        Console.WriteLine(player.FaintMessage(player));
                                         player.PlayerPkmFainted(player);
                                     }
                                     break;
@@ -149,6 +153,7 @@ public class Gameplay
                                     pkmAlive = player.GetActivePokemon().CheckPokemonAlive(player.GetActivePokemon().GetCurrentLife());
                                     if (pkmAlive == false)
                                     {
+                                        Console.WriteLine(player.FaintMessage(player));
                                         player.PlayerPkmFainted(player);
                                     }
                                     else
@@ -160,6 +165,7 @@ public class Gameplay
                                     pkmAlive = enemy.GetActivePokemon().CheckPokemonAlive(enemy.GetActivePokemon().GetCurrentLife());
                                     if (pkmAlive == false)
                                     {
+                                        Console.WriteLine(enemy.FaintMessage(enemy));
                                         enemy.EnemyPkmFainted(enemy);
                                     }
                                     break;

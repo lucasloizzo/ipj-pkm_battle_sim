@@ -11,7 +11,6 @@ public sealed class Player : Trainer
 
     public BattleChoice Choice()
     {
-        //hacer enum global para opcion de switch
         Console.WriteLine("1- Fight     2- Switch");
         int input = 0;
         input = Convert.ToInt32(Console.ReadLine());
@@ -78,5 +77,29 @@ public sealed class Player : Trainer
             Console.WriteLine("# - " + i);
             Console.WriteLine(pokemons[i].GetPkmData());
         }
+    }
+
+    public Player PlayerPkmFainted(Player player)
+    {
+        bool teamAlive = player.CheckTeamAlive(player);
+        int pokemonChoice = 0;
+        if (teamAlive == true)
+        {
+
+            do
+            {
+                Console.WriteLine("Active Pokemon fainted.");
+                pokemonChoice = player.PokemonChoice(player.GetPokemonTeam());
+                try
+                {
+                    player.ChangeActivePokemon(pokemonChoice);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("That # of pokemons does not exist. Try again.");
+                }
+            } while (player.GetActivePokemon().CheckPokemonAlive(player.GetActivePokemon().GetCurrentLife()) == false);
+        }
+        return player;
     }
 }

@@ -55,30 +55,6 @@ public abstract class Trainer
         pokemons[input] = aux;
     }
 
-    public Player PlayerPkmFainted(Player player) //ver si lo paso a player
-    {
-        bool teamAlive = player.CheckTeamAlive(player);
-        int pokemonChoice = 0;
-        if (teamAlive == true)
-        {
-
-            do
-            {
-                Console.WriteLine("Active Pokemon fainted.");
-                pokemonChoice = player.PokemonChoice(player.GetPokemonTeam());
-                try
-                {
-                    player.ChangeActivePokemon(pokemonChoice);
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("That # of pokemons does not exist. Try again.");
-                }
-            } while (player.GetActivePokemon().CheckPokemonAlive(player.GetActivePokemon().GetCurrentLife()) == false);
-        }
-        return player;
-    }
-
     public Pokemon GetActivePokemon()
     {
         return pokemons[0];
@@ -92,5 +68,13 @@ public abstract class Trainer
     public List<Pokemon> GetPokemonTeam()
     {
         return pokemons;
+    }
+
+    public string FaintMessage(Trainer trainer)
+    {
+        string message = "";
+
+        message += trainer.GetName() + "'s " + trainer.GetActivePokemon().GetName() + " fainted.";
+        return message;
     }
 }

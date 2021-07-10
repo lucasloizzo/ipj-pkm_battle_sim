@@ -9,7 +9,7 @@ public sealed class Enemy : Trainer
 
     }
 
-    public Enemy EnemyPkmFainted(Enemy enemy) //ver si lo paso a enemy
+    public Enemy EnemyPkmFainted(Enemy enemy)
     {
         bool teamAlive = enemy.CheckTeamAlive(enemy);
         bool pkmAlive;
