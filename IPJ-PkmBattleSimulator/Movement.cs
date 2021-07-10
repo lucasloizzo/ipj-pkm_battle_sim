@@ -8,7 +8,7 @@ public abstract class Movement
     public int potency;
     //public int maxUses;
     public string type;
-    public abstract int Use(Pokemon caster, Pokemon objective);
+    public abstract float Use(Pokemon caster, Pokemon objective);
 
 }
 
@@ -20,7 +20,7 @@ public sealed class DefaultError : Movement
         potency = 0;
         type = "Normal";
     }
-    public override int Use(Pokemon caster, Pokemon objective)
+    public override float Use(Pokemon caster, Pokemon objective)
     {
         return 0;
     }
@@ -35,14 +35,14 @@ public sealed class Tackle : Movement
     public Tackle()
     {
         name = "Tackle";
-        potency = 40;
+        potency = 35;
         type = "Normal";
     }
 
-    public override int Use(Pokemon caster, Pokemon objective)
+    public override float Use(Pokemon caster, Pokemon objective)
     {
-        int damage = 0;
-        damage = (caster.GetAttack() + potency - objective.GetDefense());
+        float damage;
+        damage = (float)(((0.2 * caster.GetLevel() + 1) * caster.GetAttack() * potency) / (25 * objective.GetDefense())) + 2;
         return damage;
     }
 }
@@ -52,14 +52,14 @@ public sealed class Thunderbolt : Movement
     public Thunderbolt()
     {
         name = "Thunderbolt";
-        potency = 400;
+        potency = 95;
         type = "Electric";
     }
 
-    public override int Use(Pokemon caster, Pokemon objective)
+    public override float Use(Pokemon caster, Pokemon objective)
     {
-        int damage = 0;
-        damage = (caster.GetSpecialAttack() + potency - objective.GetSpecialDefense());
+        float damage;
+        damage = (float)(((0.2 * caster.GetLevel() + 1) * caster.GetSpecialAttack() * potency) / (25 * objective.GetSpecialDefense())) + 2;
         return damage;
     }
 }
@@ -73,7 +73,7 @@ public sealed class Splash : Movement
         type = "Normal";
     }
 
-    public override int Use(Pokemon caster, Pokemon objective)
+    public override float Use(Pokemon caster, Pokemon objective)
     {
         int damage = 0;
         return damage;

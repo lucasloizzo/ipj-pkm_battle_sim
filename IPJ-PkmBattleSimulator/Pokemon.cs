@@ -8,8 +8,7 @@ public class Pokemon
 {
     private string name;
     private int level;
-    private string type;
-    //private List<Type> types;
+    private List<Type> types;
     private int maxLife;
     private int currentLife;
     private int attack;
@@ -23,6 +22,7 @@ public class Pokemon
 
     public Pokemon()
     {
+        types = new List<Type>();
         movements = new List<Movement>();
     }
 
@@ -30,7 +30,11 @@ public class Pokemon
     {
         this.name = lines[0];
         this.level = Convert.ToInt32(lines[1]);
-        this.type = lines[2];
+        string[] types = lines[2].Split(" ");
+        for (int i = 0; i < types.Length; i++)
+        {
+            this.types.Add(Types.GetInstance().GetType(types[i]));
+        }
         this.maxLife = Convert.ToInt32(lines[3]);
         this.currentLife = maxLife;
         this.attack = Convert.ToInt32(lines[4]);
@@ -76,6 +80,11 @@ public class Pokemon
         return name;
     }
 
+    public int GetLevel()
+    {
+        return level;
+    }
+
     public int GetCurrentLife()
     {
         return currentLife;
@@ -106,6 +115,16 @@ public class Pokemon
         return speed;
     }
 
+    public string GetTypes()
+    {
+        string types = "";
+        for (int i = 0; i < this.types.Count; i++)
+        {
+            types += this.types[i] + " ";
+        }
+        return types;
+    }
+
     public string GetStatus()
     {
         string status = "";
@@ -122,7 +141,7 @@ public class Pokemon
 
         status += name + "\n";
         status += "HP: " + currentLife + "/" + maxLife + "\n";
-        status += "Types: " + type + "\n";
+        status += "Types: " + GetTypes() + "\n";
         //status += GetMovementName();
         return status;
     }

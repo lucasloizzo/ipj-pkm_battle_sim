@@ -24,14 +24,14 @@ public class Gameplay
 
     public Trainer Battle(Player player, Enemy enemy)
     {
-        bool battling = true;
+        bool battling;
         BattleChoice playerBattleChoice;
         BattleChoice enemyDecision;
         SpeedCheck speedCheck;
         Movement playerMovementChoice = new DefaultError();
-        Movement enemyMovement = new DefaultError();
+        Movement enemyMovement;
         int pokemonChoice = 0;
-        bool pkmAlive = true;
+        bool pkmAlive;
 
         do
         {
@@ -86,11 +86,13 @@ public class Gameplay
                     switch (enemyDecision)
                     {
                         case BattleChoice.Switch:
-                            //TODO implement me
+
+                            //TODO implement enemy switch
+
                             break;
                         case BattleChoice.Fight:
                             //enemy pkm use move
-                            Console.WriteLine("Enemy forgot how to act");
+                            player = (Player)DamageCalc(enemy, player, enemyMovement);
                             //check if player pkm faints (if it does, select one to replace)
                             pkmAlive = player.GetActivePokemon().CheckPokemonAlive(player.GetActivePokemon().GetCurrentLife());
                             if (pkmAlive == false)
@@ -107,6 +109,7 @@ public class Gameplay
                     switch (enemyDecision)
                     {
                         case BattleChoice.Switch:
+
                             //TODO implement enemy switch
 
                             //player pokemon use move
@@ -131,12 +134,16 @@ public class Gameplay
                                     if (pkmAlive == false)
                                     {
                                         Console.WriteLine(enemy.FaintMessage(enemy));
+                                        enemyMovement = new DefaultError();
                                         enemy.EnemyPkmFainted(enemy);
                                     }
                                     else
                                     {
                                         //enemy pkm use move
-                                        player = (Player)DamageCalc(enemy, player, enemyMovement);
+                                        if (enemyMovement.name != "DefaultError")
+                                        {
+                                            player = (Player)DamageCalc(enemy, player, enemyMovement);
+                                        }
                                     }
                                     //check if player pkm faints (if it does, select one to replace)
                                     pkmAlive = player.GetActivePokemon().CheckPokemonAlive(player.GetActivePokemon().GetCurrentLife());
@@ -261,10 +268,29 @@ public class Gameplay
 
     public Trainer DamageCalc(Trainer caster, Trainer objective, Movement movementChoice)
     {
-        int damage = 0;
-        damage = movementChoice.Use(caster.GetActivePokemon(), objective.GetActivePokemon());
-        objective.GetActivePokemon().TakeDamage(damage);
-        Console.WriteLine(caster.GetName() + "'s " + caster.GetActivePokemon().GetName() + " uses " + movementChoice + ". It dealt " + damage + " damage.\n");
+        float damage, movementDamage;
+        float effectiveness;
+        float bonification = 1;
+        float variation = new Random().Next(85, 100);
+        TypeEffectiveness typeEffectiveness;
+        Pokemon casterPkm = caster.GetActivePokemon();
+        Pokemon objectivePkm = objective.GetActivePokemon();
+        typeEffectiveness = TypeEffectivenessCheck.CheckTypeEffectiveness(Types.GetInstance().GetType(movementChoice.type), Types.GetInstance().GetType(objectivePkm.GetTypes().Trim()));
+
+        //Check movement effectiveness againts target pkm
+        effectiveness = TypeEffectivenessCheck.GetEffectivenessValue(typeEffectiveness);
+
+        //If movement is the same type of the pokemon, it gets a 1.5 bonus
+        if (Types.GetInstance().GetType(movementChoice.type) == Types.GetInstance().GetType(objectivePkm.GetTypes().Trim()))
+        {
+            bonification = 1.5f;
+        }
+
+        movementDamage = movementChoice.Use(casterPkm, objectivePkm);
+        damage = 0.01f * bonification * effectiveness * variation * movementDamage;
+
+        objectivePkm.TakeDamage((int)damage);
+        Console.WriteLine(caster.GetName() + "'s " + casterPkm.GetName() + " uses " + movementChoice + ". It's " + TypeEffectivenessCheck.GetEffectiveness(typeEffectiveness)  + ". It dealt " + (int)damage + " damage.\n");
 
         return objective;
     }

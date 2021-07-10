@@ -1,0 +1,1 @@
+﻿public enum TypeEffectiveness { SuperEffective = 0, NotVeryEfffective = 1, Immune = 2, Neutral = 3 }
